@@ -1,9 +1,0 @@
-eclipse.preferences.version=1
-extraProperties=
-lastAnalysisDate=1427186450433
-projectArtifactId=com.dynatrace.adk
-projectBranch=trunk
-projectGroupId=dynaTrace
-projectKey=dynaTrace\:com.dynatrace.adk\:trunk
-serverUrl=http\://sonar.emea.cpwr.corp/dynatrace
-version=2
