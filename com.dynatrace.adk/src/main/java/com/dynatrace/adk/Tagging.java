@@ -121,7 +121,7 @@ public interface Tagging {
     	public byte[] getPrevTag();
     	
     	/**
-    	 * Get string representation of this custom tag in the format <currentTag>:<prevTag>
+    	 * Get string representation of this custom tag in the format <tt>&lt;currentTag&gt;:&lt;prevTag&gt;</tt>
     	 * @return hex string representation of this tag
     	 */
     	public String asString();
@@ -130,21 +130,21 @@ public interface Tagging {
     /**
      * Create a custom tag object
      * 		Note: the "prevTagData" is no longer required and used, therefore this method has been deprecated.
-     * 		@see Tagging.createCustomTag(byte[] tagData);
      * 
-     * @param tagData	  byte array containing the custom tag
+     * @param tagData byte array containing the custom tag
      * @param prevTagData byte array containing the previous custom tag (optional)
      *        This parameter allows to chain up custom tags. It is usually null
      *        if no previous custom tag is present - in this case the custom tag
      *        will be linked to the existing dynaTrace tag of the current thread.
      * @return CustomTag object
+     * @see Tagging#createCustomTag(byte[] tagData)
      * @deprecated
      */
     CustomTag createCustomTag(byte[] tagData, byte[] prevTagData);
     
     /**
      * Create a custom tag object
-     * @param tagData	  byte array containing the custom tag
+     * @param tagData byte array containing the custom tag
      * @return CustomTag object
      */
     CustomTag createCustomTag(byte[] tagData);
@@ -153,7 +153,7 @@ public interface Tagging {
 	 * Set specified custom tag at server side. The function has the same
 	 * functionality as setTag(), but allows to continue a PurePath by using
 	 * the specified custom tag. 
-	 * @param customTag		Custom tag to be continued
+	 * @param customTag Custom tag to be continued
 	 */
 	void setCustomTag(byte[] customTag);
 	

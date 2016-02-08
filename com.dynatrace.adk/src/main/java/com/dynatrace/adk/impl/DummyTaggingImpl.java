@@ -6,7 +6,7 @@ package com.dynatrace.adk.impl;
 import com.dynatrace.adk.Tagging;
 
 /**
- * @see {@link Tagging}
+ * @see Tagging
  * @author ardeshir.arfaian, rainer.klaffenboeck
  */
 public class DummyTaggingImpl implements Tagging {

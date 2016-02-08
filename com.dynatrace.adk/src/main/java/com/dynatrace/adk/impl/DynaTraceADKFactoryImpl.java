@@ -11,7 +11,7 @@ import com.dynatrace.adk.Tagging;
 import com.dynatrace.diagnostics.agent.AgentNative;
 
 /**
- * @see {@link DynaTraceADKFactory}
+ * @see DynaTraceADKFactory
  * @author ardeshir.arfaian, rainer.klaffenboeck
  */
 public class DynaTraceADKFactoryImpl {

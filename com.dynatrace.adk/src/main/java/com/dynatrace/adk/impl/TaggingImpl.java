@@ -13,11 +13,14 @@ import com.dynatrace.diagnostics.agent.introspection.Introspection;
 import com.dynatrace.diagnostics.agent.shared.Constants;
 
 /**
- * @see {@link Tagging}
+ * @see Tagging
  * @author ardeshir.arfaian, rainer.klaffenboeck
  */
 public class TaggingImpl implements Tagging {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public byte[] getTag() {
 		TraceTag traceTag = ThreadLocalTag.getTraceTag();
 		if (traceTag == null || !traceTag.isTag()) {
@@ -31,6 +34,9 @@ public class TaggingImpl implements Tagging {
 		return tag;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public String getTagAsString() {
 		TraceTag traceTag = ThreadLocalTag.getTraceTag();
 		if (traceTag == null || !traceTag.isTag()) {
@@ -42,6 +48,9 @@ public class TaggingImpl implements Tagging {
 		return traceTag.asString();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setTag(byte[] tag) {
 		TraceTag traceTag = ThreadLocalTag.getOrCreateTraceTag();
 		if (traceTag.isTag()){
@@ -62,6 +71,9 @@ public class TaggingImpl implements Tagging {
 		logDebug("setTag", traceTag, null);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setTagFromString(String tag) {
 		TraceTag traceTag = ThreadLocalTag.getOrCreateTraceTag();
 		if (traceTag.isTag()) {
@@ -82,6 +94,9 @@ public class TaggingImpl implements Tagging {
 		logDebug("setTagFromString", traceTag, null);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public boolean isTagValid(Object tagObject) {
 		byte[] tag = null;
 		if (tagObject instanceof byte[]) {
@@ -98,10 +113,16 @@ public class TaggingImpl implements Tagging {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void linkClientPurePath(boolean asynchronous) {
 		linkClientPurePath(asynchronous, null);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void linkClientPurePath(boolean asynchronous, Object specificTag) {
 		if (!mayCapture()) {
 			logDebug("linkClientPurePath: capturing disabled", null, null);
@@ -179,6 +200,9 @@ public class TaggingImpl implements Tagging {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void startServerPurePath() {
 		if (!mayCapture()) {
 			logDebug("startServerPurePath: capturing disabled", null, null);
@@ -232,6 +256,9 @@ public class TaggingImpl implements Tagging {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void endServerPurePath() {
 		if (!mayCapture()) {
 			logDebug("endServerPurePath: capturing disabled", null, null);
@@ -267,15 +294,24 @@ public class TaggingImpl implements Tagging {
 		return Agent.getInstance().isCaptureAndLicenseOk();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
     public Runnable createServerPathRunnable(Runnable runnable) {
         byte[] tag = getTag();
         return new TaggedRunnable(this, runnable, tag);
     }
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public String convertTagToString(byte[] tag) {
 		return TraceTag.convertTagToString(tag);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public byte[] convertStringToTag(String tag) {
 		return TraceTag.convertStringToTag(tag);
 	}
@@ -320,6 +356,7 @@ public class TaggingImpl implements Tagging {
     }
 
 	/**
+	 * {@inheritDoc}
 	 * @deprecated
 	 */
 	public CustomTag createCustomTag(byte[] tagData, byte[] prevTagData) {
@@ -330,6 +367,9 @@ public class TaggingImpl implements Tagging {
 		return ct;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public CustomTag createCustomTag(byte[] tagData) {
 		CustomTag ct = new CustomTagImpl(tagData);
 		if (DebugFlags.debugPathCorrelationJava) {
@@ -338,6 +378,9 @@ public class TaggingImpl implements Tagging {
 		return ct;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void setCustomTag(byte[] customTag) {
 		TraceTag traceTag = ThreadLocalTag.getOrCreateTraceTag();
 		if (traceTag.isTag()) {

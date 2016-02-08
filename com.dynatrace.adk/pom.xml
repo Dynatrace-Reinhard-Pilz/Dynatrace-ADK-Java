@@ -4,25 +4,29 @@
 	<artifactId>com.dynatrace.adk</artifactId>
 	<version>6.2.6.1006</version>
 	<name>com.dynatrace.adk</name>
+	<url>https://community.dynatrace.com/community/display/DOCDT99/Tagging+ADK+for+Java</url>
 	<description>The Dynatrace ADK for Java</description>
+<licenses>
+  <license>
+    <name>The Apache License, Version 2.0</name>
+    <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+  </license>
+</licenses>
+ <developers>
+    <developer>
+      <name>Reinhard Pilz</name>
+      <email>reinhard.pilz@dynatrace.com</email>
+      <organization>Dynatrace LLC</organization>
+      <organizationUrl>http://www.dynatrace.com</organizationUrl>
+    </developer>
+  </developers>
+  <scm>
+  	<connection>scm:git@github.com:Dynatrace-Reinhard-Pilz/Dynatrace-ADK-Java.git</connection>
+  	<developerConnection>scm:git@github.com:Dynatrace-Reinhard-Pilz/Dynatrace-ADK-Java.git</developerConnection>
+  	<url>scm:git@github.com:Dynatrace-Reinhard-Pilz/Dynatrace-ADK-Java.git</url>
+  </scm>  
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
-<!--		
-		<resources>
-			<resource>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.java</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>src/dependencies/java</directory>
-				<includes>
-					<include>**/*.java</include>
-				</includes>
-			</resource>
-		</resources>
--->
 	  	<plugins>
 	  		<plugin>
 	  			<groupId>org.apache.maven.plugins</groupId>
@@ -31,12 +35,6 @@
 	  			<configuration>
 	  				<source>1.4</source>
 	  				<target>1.4</target>
-<!--	  				
-	  				<includes>
-	  					<include>src/main/java/**/*.java</include>
-	  					<include>src/main/resources/**/*.java</include>
-	  				</includes>
--->
 	  			</configuration>
 	  		</plugin>
 	  		<plugin>
@@ -63,6 +61,30 @@
 	  					</manifestEntries>
 	  				</archive>
 	  			</configuration>
+	  		</plugin>
+	  		<plugin>
+	  			<groupId>org.apache.maven.plugins</groupId>
+	  			<artifactId>maven-javadoc-plugin</artifactId>
+	  			<executions>
+	  				<execution>
+	  					<id>attach-javadocs</id>
+	  					<goals>
+	  						<goal>jar</goal>
+	  					</goals>
+	  				</execution>
+	  			</executions>
+	  		</plugin>
+	  		<plugin>
+	  			<groupId>org.apache.maven.plugins</groupId>
+	  			<artifactId>maven-source-plugin</artifactId>
+	  			<executions>
+	  				<execution>
+	  					<id>attach-sources</id>
+	  					<goals>
+	  						<goal>jar</goal>
+	  					</goals>
+	  				</execution>
+	  			</executions>
 	  		</plugin>	  		
 	  	</plugins>
 	</build>  
