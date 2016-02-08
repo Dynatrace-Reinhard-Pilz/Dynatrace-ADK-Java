@@ -1,3 +1,6 @@
+/**
+ *  Copyright (c) Dynatrace 2001-2016
+ */
 package com.dynatrace.adk;
 
 /**
