@@ -8,8 +8,8 @@
 	<description>The Dynatrace ADK for Java</description>
 <licenses>
   <license>
-    <name>The Apache License, Version 2.0</name>
-    <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    <name>Dynatrace BSD</name>
+    <url>https://community.dynatrace.com/community/download/attachments/5144912/dynaTraceBSD.txt</url>
   </license>
 </licenses>
  <developers>
