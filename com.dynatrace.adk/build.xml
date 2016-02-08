@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="dynaTrace ADK" default="all">
+	<description>${ant.project.name}</description>
+
+	<property name="bundle.symbolic.name" value="com.dynatrace.adk" />
+
+	<property name="dir.root" value="../../../jloadtrace" />
+	<property file="${dir.root}/version.properties" />
+	<property name="build.pathpostfix" value="-${version.major}.${version.minor}" />
+	<property name="version" value="${version.major}.${version.minor}.${version.revision}.${version.buildnumber}" />
+
+	<property file="${dir.root}/../ant.properties" />
+	<property file="${user.home}/ant.properties" />
+
+	<property file="built.properties"/>
+
+	<property name="dir.src" value="./src" />
+	<property name="dir.build" location="build/ant"/>
+	<property name="dir.doc" location="docs"/>
+
+	<condition property="bundle.properties.filename" value="bundles.${target.platform}.properties"
+			else="bundles.properties">
+		<isset property="target.platform" />
+	</condition>
+	<!-- "target.platform" property defined in "ant.properties" would take precedence: -->
+	<property name="target.platform" value="."/>
+	<property file="${dir.root}/${bundle.properties.filename}" />
+	<property name="dir.plugins" location="${dir.root}/${target.platform}/plugins" />
+
+	<property name="dir.plugins.build" location="${dir.root}/plugins-build" />
+
+	<property name="lib.bundle" location="${dir.plugins.build}/${bundle.symbolic.name}.jar" />
+
+    <!-- =================================
+          target: buildLibrary
+         ================================= -->
+	<target name="all" depends="init, compile, link" unless="built" description="AutoSensorPlacement">
+		<echo>Done</echo>
+	</target>
+
+
+	<!-- - - - - - - - - - - - - - - - - -
+	          target: init
+	         - - - - - - - - - - - - - - - - - -->
+	<target name="init" unless="built">
+		<mkdir dir="${dir.build}" />
+		<mkdir dir="${dir.plugins.build}" />
+	</target>
+
+    <!-- - - - - - - - - - - - - - - - - -
+          target: compile
+         - - - - - - - - - - - - - - - - - -->
+	<target name="compile" depends="init" unless="built">
+		<echo>${ant.project.name}</echo>
+
+		<javac deprecation="no" nowarn="${compiler.nowarn}" srcdir="${dir.src}" destdir="${dir.build}" source="1.4" target="1.4" debug="true" encoding="UTF-8">
+			<classpath location="../com.dynatrace.diagnostics.agent/build/ant" />
+		</javac>
+	</target>
+
+    <!-- - - - - - - - - - - - - - - - - -
+          target: link
+         - - - - - - - - - - - - - - - - - -->
+	<target name="link" depends="compile" unless="built">
+		<delete failonerror="no">
+			<fileset dir="${dir.plugins.build}" includes="${bundle.symbolic.name}.jar"/>
+		</delete>
+
+		<jar jarfile="${lib.bundle}" manifest="META-INF/MANIFEST.MF">
+			<fileset dir="${dir.build}">
+				<include name="**" />
+			</fileset>
+			<fileset dir=".">
+				<include name="icons/**" />
+				<include name="plugin.xml" />
+				<include name="plugin.properties" />
+			</fileset>
+		</jar>
+
+		<echo file="built.properties" append="false">built</echo>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - -
+	          target: clean
+	         - - - - - - - - - - - - - - - - - -->
+    <target name="clean" depends="clearBuiltProperty" description="clean up">
+    	<delete dir="${dir.build}" failonerror="no" />
+    	<delete dir="${dir.doc}" failonerror="no" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - -
+	          target: clearBuiltProperty
+	         - - - - - - - - - - - - - - - - - -->
+    <target name="clearBuiltProperty" description="update without build">
+    	<delete file="built.properties"/>
+	</target>
+
+    <!-- - - - - - - - - - - - - - - - - -
+          target: javadoc
+         - - - - - - - - - - - - - - - - - -->
+	<target name="javadoc">
+		  <javadoc packagenames="com.dynatrace.adk.*"
+		           sourcepath="src"
+		           excludepackagenames="com.dynatrace.adk.impl.*"
+		           defaultexcludes="yes"
+		           destdir="${dir.doc}/api"
+		           author="false"
+		           version="true"
+		           use="true"
+		           windowtitle="Agent SDK">
+		    <doctitle><![CDATA[<h1>dynaTrace ADK</h1>]]></doctitle>
+		    <bottom><![CDATA[<i>Copyright &#169; 2009 dynaTrace Software GmbH. All Rights Reserved.</i>]]></bottom>
+		    <!--<tag name="todo" scope="all" description="To do:"/>
+		    <group title="Group 1 Packages" packages="com.dummy.test.a*"/>
+		    <group title="Group 2 Packages" packages="com.dummy.test.b*:com.dummy.test.c*"/>
+		    <link offline="true" href="http://java.sun.com/j2se/1.5.0/docs/api/" packagelistLoc="C:\tmp"/>
+		    <link href="http://developer.java.sun.com/developer/products/xml/docs/api/"/>-->
+		  </javadoc>
+	</target>
+
+</project>

@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Agent SDK
+Bundle-SymbolicName: com.dynatrace.adk;singleton:=true
+Bundle-Version: 6.2.6.1006
+Bundle-Vendor: dynaTrace software GmbH
+Export-Package: com.dynatrace.adk
+Built-By: builduser
+Implementation-Version: 6.2.6.1006
+Bundle-ClassPath: .
+Bundle-RequiredExecutionEnvironment: J2SE-1.4
