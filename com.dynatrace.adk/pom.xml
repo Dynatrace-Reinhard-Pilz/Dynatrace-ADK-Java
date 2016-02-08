@@ -73,6 +73,9 @@
 	  					</goals>
 	  				</execution>
 	  			</executions>
+	  			<configuration>
+	  				<excludePackageNames>com.dynatrace.adk.impl:com.dynatrace.diagnostics.agent:com.dynatrace.diagnostics.agent.introspection:com.dynatrace.diagnostics.agent.shared</excludePackageNames>
+	  			</configuration>
 	  		</plugin>
 	  		<plugin>
 	  			<groupId>org.apache.maven.plugins</groupId>
@@ -85,6 +88,12 @@
 	  					</goals>
 	  				</execution>
 	  			</executions>
+	  			<configuration>
+	  				<excludes>
+	  					<exclude>com/dynatrace/diagnostics/**</exclude>
+	  					<exclude>com/dynatrace/adk/impl/**</exclude>
+	  				</excludes>
+	  			</configuration>
 	  		</plugin>	  		
 	  	</plugins>
 	</build>  
